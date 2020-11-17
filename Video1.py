@@ -69,21 +69,17 @@ class s3(GraphScene):
         ymc = TexMobject("y=m\\times x+c").move_to(3*RIGHT+2*UP)
         awb = TexMobject("a_1=w\\times a_0+b").move_to(3*RIGHT+2*UP)
         func_graph = self.get_graph(self.func_to_graph, self.function_color)
-<<<<<<< HEAD
 
         points = []
-        numPoints = 20
-        minxPoints = 0
+        numPoints = 40
+        minxPoints = -5
         maxxPoints = 5
         for i in range(numPoints):
             x = np.random.randint(maxxPoints - minxPoints) + minxPoints + np.random.rand()
-            points.append(SmallDot(x, self.second_line(x) + np.random.normal()))
+            points.append(SmallDot(self.coords_to_point(x, self.second_line(x) + np.random.normal()/5)))
 
         #Display graphs
-        self.play(Write(ymc), ShowCreation(func_graph))
-        for i in range(numPoints):
-            self.play(ShowCreation(points[i]))
-=======
+
         regression_bias = TexMobject("b = \\frac{\\left(\\sum{a_1}\\right)\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)\\left(\\sum{a_0a_1}\\right)}{n\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)^2}").scale(0.5).move_to(4.5*LEFT+3*UP)
         regression_weight = TexMobject("w = \\frac{n\\left(\\sum{a_0a_1}\\right)-\\left(\\sum{a_0}\\right)\\left(\\sum{a_1}\\right)}{n\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)^2}").scale(0.5).next_to(regression_bias, DOWN, aligned_edge=LEFT)
         point = Dot(self.coords_to_point(1, 1))
@@ -93,7 +89,8 @@ class s3(GraphScene):
         #Display graphs
         self.play(Write(ymc), ShowCreation(func_graph))
         self.play(Write(regression_bias), Write(regression_weight))
->>>>>>> 5a2d778458db662e05dfb9efd927e03158b37db3
+        for i in range(numPoints):
+            self.play(ShowCreation(points[i]), run_time=0.01)
         self.wait(1)
         self.play(ReplacementTransform(ymc, awb))
         self.wait(1)
