@@ -68,27 +68,18 @@ class s3(GraphScene):
         ymc = TexMobject("y=m\\times x+c").move_to(3*RIGHT+2*UP)
         awb = TexMobject("a_1=w\\times a_0+b").move_to(3*RIGHT+2*UP)
         func_graph = self.get_graph(self.func_to_graph, self.function_color)
-        #graph_lab = self.get_graph_label(func_graph, label = "line") 
 
 
         point = Dot(self.coords_to_point(1, 1))
        
 
-        #x = self.coords_to_point(1, self.func_to_graph(1))
-        #y = self.coords_to_point(0, self.func_to_graph(1))
-        #horz_line = Line(x,y, color=YELLOW)
-
-        #point = Dot(self.coords_to_point(1,self.func_to_graph(1)))
 
         #Display graphs
         self.play(Write(ymc), ShowCreation(func_graph))
-        self.CONFIG["x_axis_label"] = "$a_0$"
         self.wait(1)
-        self.play(ReplacementTransform(ymc, awb), self.CONFIG["y_axis_label"], "$a_1$")
+        self.play(ReplacementTransform(ymc, awb))
         self.wait(1)
-        #self.play(ShowCreation(vert_line))
-        #self.play(ShowCreation(horz_line))
-        #self.add(point)
+
     def func_to_graph(self, x):
         return self.w*x+self.b
 
