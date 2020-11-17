@@ -1,4 +1,5 @@
 from manimlib.imports import *
+import numpy as np
 
 
 class s1(Scene):
@@ -69,20 +70,26 @@ class s3(GraphScene):
         awb = TexMobject("a_1=w\\times a_0+b").move_to(3*RIGHT+2*UP)
         func_graph = self.get_graph(self.func_to_graph, self.function_color)
 
-
-        point = Dot(self.coords_to_point(1, 1))
-       
-
+        points = []
+        numPoints = 20
+        minxPoints = 0
+        maxxPoints = 5
+        for i in range(numPoints):
+            x = np.random.randint(maxxPoints - minxPoints) + minxPoints + np.random.rand()
+            points.append(SmallDot(x, self.second_line(x) + np.random.normal()))
 
         #Display graphs
         self.play(Write(ymc), ShowCreation(func_graph))
+        for i in range(numPoints):
+            self.play(ShowCreation(points[i]))
         self.wait(1)
         self.play(ReplacementTransform(ymc, awb))
         self.wait(1)
 
     def func_to_graph(self, x):
         return self.w*x+self.b
-
+    def second_line(self, x):
+        return 0.5*x + 0.25
 
 class s4(Scene):
     def construct(self):
