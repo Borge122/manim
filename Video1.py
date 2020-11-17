@@ -143,7 +143,7 @@ class s4(Scene):
 
         # #Maxwell's Equations
         me = TextMobject("Maxwell's Equations").scale(0.8).shift(3 * UP + 4 * RIGHT)
-        me1 = TexMobject("\\nabla", " \\cdot \\bold{E} = \\frac{\\rho}{\\epsilon_{0}}").scale(0.5).next_to(me, DOWN, aligned_edge=RIGHT)
+        me1 = TexMobject("\\nabla", " \\cdot ","\\bold{E}"," = \\frac{\\rho}{\\epsilon_{0}}").scale(0.5).next_to(me, DOWN, aligned_edge=RIGHT)
         me2 = TexMobject("\\nabla", " \\cdot \\bold{B} = 0").scale(0.5).next_to(me1, DOWN, aligned_edge=RIGHT)
         me3 = TexMobject("\\nabla", " \\times\\bold{E} = -\\frac{\\partial \\bold{B}}{\\partial t}").scale(0.5).next_to(me2, DOWN, aligned_edge=RIGHT)
         me4 = TexMobject("\\nabla", " \\times\\bold{B} = \\mu_{0}\\bold{j}+\\mu_{0}\\epsilon_{0}\\frac{\\partial \\bold{E}}{\\partial t}").scale(0.5).next_to(me3, DOWN, aligned_edge=RIGHT)
@@ -183,8 +183,7 @@ class s4(Scene):
         # #Fade Out equations and show how maxwell's equations describe electric field.
         self.play(*[FadeOut(i) for i in [de, de1, we, we1, se, se1, me3, me4, me2, me, nablaTex, nablaText]], me1.move_to, 0, me1.scale, 3)
         self.wait(1)
-        BP = TexMobject(r"\delta^{L} = ",r"\nabla",r"_{a}",r" C ",r"\odot",r"\sigma'\left(z^{L}\right)").scale(2).move_to(DOWN)
-        BP_c =  TexMobject(r" \bold{C} ").scale(2).move_to(DOWN)
+        BP = TexMobject(r"\delta^{L} = ",r"\nabla",r"_{a}",r" C ",r"\odot",r"\sigma'\left(z^{L}\right)").scale(1.5).move_to(DOWN)
         self.play(me1.move_to, UP, Write(BP))
-        #self.play(ReplacementTransform(BP_c.copy, BP[3]))
+        self.play(FadeOut(BP[0]), FadeOut(BP[4:]), FadeOut(BP[4:]), FadeOut(me1[e:]))
         self.wait(1)
