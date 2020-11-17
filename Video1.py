@@ -57,8 +57,8 @@ class s3(GraphScene):
         "graph_origin": ORIGIN,
         "function_color": WHITE,
         "axes_color": BLUE,
-        "x_axis_label": "$x$",
-        "y_axis_label": "$y$"
+        "x_axis_label": "$a_0$",
+        "y_axis_label": "$a_1$"
     }
     def construct(self):
         #Make graph
