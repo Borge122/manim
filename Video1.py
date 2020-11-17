@@ -69,10 +69,10 @@ class s3(GraphScene):
         #for point in points:
             #Dot(SmallDot(self.coords_to_point(point[0], point[1]))
 
-        ymc = TexMobject("y=m\\times x+c").move_to(3*RIGHT+2*UP)
+        ymc = TexMobject("y=", "m", "\\times x+", "c").move_to(3*RIGHT+2*UP)
         awb = TexMobject("a_1=w\\times a_0+b").move_to(3*RIGHT+2*UP)
         func_graph = self.get_graph(self.func_to_graph, self.function_color)
-<<<<<<< HEAD
+        second_graph = self.get_graph(self.second_line, self.function_color)
 
         points = []
         numPoints = 40
@@ -82,10 +82,9 @@ class s3(GraphScene):
             x = np.random.randint(maxxPoints - minxPoints) + minxPoints + np.random.rand()
             points.append(SmallDot(self.coords_to_point(x, self.second_line(x) + np.random.normal()/5)))
 
+        next_ymc = TexMobject("y=", "0.5", "\\times x+", "0.25").move_to(3*RIGHT+2*UP)
         #Display graphs
 
-=======
->>>>>>> 9ca2c29702fa31d25ca82cb6e09d26a00d411795
         regression_bias = TexMobject("b = \\frac{\\left(\\sum{a_1}\\right)\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)\\left(\\sum{a_0a_1}\\right)}{n\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)^2}").scale(0.5).move_to(4.5*LEFT+3*UP)
         regression_weight = TexMobject("w = \\frac{n\\left(\\sum{a_0a_1}\\right)-\\left(\\sum{a_0}\\right)\\left(\\sum{a_1}\\right)}{n\\left(\\sum{a_0^2}\\right)-\\left(\\sum{a_0}\\right)^2}").scale(0.5).next_to(regression_bias, DOWN, aligned_edge=LEFT)
         point = Dot(self.coords_to_point(1, 1))
@@ -95,17 +94,19 @@ class s3(GraphScene):
         #Display graphs
         self.play(Write(ymc), ShowCreation(func_graph))
         self.play(Write(regression_bias), Write(regression_weight))
-<<<<<<< HEAD
         for i in range(numPoints):
             self.play(ShowCreation(points[i]), run_time=0.01)
-=======
->>>>>>> 9ca2c29702fa31d25ca82cb6e09d26a00d411795
+        self.wait(1)
+        self.play(Transform(func_graph, second_graph), Transform(ymc, next_ymc))
         self.wait(1)
         self.play(ReplacementTransform(ymc, awb))
         self.wait(1)
 
     def func_to_graph(self, x):
         return self.w*x+self.b
+
+    def second_line(self, x):
+        return 0.5*x + 0.25
 
 
 class s4(Scene):
